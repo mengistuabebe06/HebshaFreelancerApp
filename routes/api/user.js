@@ -89,7 +89,7 @@ router.post('/login',(req,res)=>{
                     //User matched
                     const payload = {id: user.id, name: user.name, avatar: user.avatar, }
                     //sign Token
-                    jwt.sign(payload, keys.secretorkey,{expiresIn: 3600}, (err,token)=>{
+                    jwt.sign(payload, keys.secretorkey,{expiresIn: 7200}, (err,token)=>{
                         res.json({
                             success: true,
                             token: 'Bearer ' + token
