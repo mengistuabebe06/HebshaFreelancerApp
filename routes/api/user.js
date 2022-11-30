@@ -20,14 +20,15 @@ const User = require('../../model/User')
 router.get('/test',(req,res)=>{
     res.json({mes:"user works"})
 })
-//@routes GET api/users/test
-//@desc test user routs
+//@routes post api/users/register
+//@desc register user data 
+//private
 router.post('/register',(req,res)=>{
     const { errors, isValid} = validateRegisterInput(req.body)
 
     //check validation
     if(!isValid){
-        return res.status(400).json(errors)
+        return res.status(400).json(errors.message)
     }
     
     User.findOne({email:req.body.email})
@@ -68,7 +69,7 @@ router.post('/login',(req,res)=>{
     const { errors, isValid} = validateLoginInput(req.body)
 
     //check validation
-    if(!isValid){
+    if(isValid){
         return res.status(400).json(errors)
     }
 //stop here 11:10
