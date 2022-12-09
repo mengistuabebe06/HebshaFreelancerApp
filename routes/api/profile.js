@@ -22,17 +22,24 @@ const profile = require('../../validation/profile')
 //@desc  GET current users profile
 //@access private
 
-router.get('/',passport.authenticate('jwt', {session: false}), (req,res)=>{
+// router.get('/',passport.authenticate('jwt', {session: false}), (req,res)=>{
 
-    Profile.findOne({ user: req.user.id})
-        .populate('user',['name', 'avatar'])
-        .then(profile =>{
-            if(!profile){
-                return res.status(404).json('There is no profile for this user')
-            }
-            res.json(profile)
-        })
-        .catch(err => res.status(404).json(err))
+//     Profile.findOne({ user: req.user.id})
+//         .populate('user',['name', 'avatar'])
+//         .then(profile =>{
+//             if(!profile){
+//                 return res.status(404).json('There is no profile for this user')
+//             }
+//             res.json(profile)
+//         })
+//         .catch(err => res.status(404).json(err))
+// })
+router.get('/', (req,res)=>{
+
+    Profile.find()
+     .sort({date: -1})
+     .then(job => res.json(job))
+     .catch(err => res.status(404).json({noJobfoud: "No Profile found "}))
 })
 //@routes GET api/profile/handle/:handle
 //@desc  Get the profile by handle

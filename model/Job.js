@@ -11,6 +11,9 @@ const JobSchema = new Schema({
     description:{
         type: String,
     },
+    price:{
+        type: String,
+    },
     status:{
         type:[String]
     },

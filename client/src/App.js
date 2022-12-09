@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Routes, Route , useRoutes} from "react-router-dom";
+import React, { Fragment,Component } from 'react'
+import { BrowserRouter as Router, Routes, Route , useRoutes, Switch} from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -12,11 +12,17 @@ import Slider from './components/shared/Slider';
 import Job from './components/pages/Job';
 import JobList from './components/pages/JobList';
 import About from './components/pages/About';
+import Profiles from './components/pages/Profiles';
+import PrivateRoute from './components/shared/PrivateRoute';
+import CreateProfile from './components/create-profile/CreateProfile';
+import EditProfile from './components/edit-profile/EditProfile';
 
 import './App.css';
 import setAuthToken from './utils/setAuthToken';
 import { logoutUser, setCurrentUser } from './action/authAction';
 import jwtDecode from 'jwt-decode';
+import { CLEAR_CURRENT_PROFILE } from './action/type';
+
 
 
 //check for token and to take the session
@@ -34,22 +40,24 @@ if(localStorage.jwtToken){
     //logout user
     store.dispatch(logoutUser())
     // TODO: crear current profile
+    store.dispatch(CLEAR_CURRENT_PROFILE())
     // redirect to login
     window.location.href('/login')
   }
 }
 
-const AllRoutes = () => {
-  let routes = useRoutes([
-    { path: "/", element: <Landing /> },
-    { path: "/login", element: <Login /> },
-    { path: "/register", element: <Register /> },
-    { path: "/job", element: <Job /> },
-    { path: "/job/joblist", element: <JobList /> },
-    { path: "/about", element: <About /> },
-  ]);
-  return routes;
-};
+// const AllRoutes = () => {
+//   let routes = useRoutes([
+//     { path: "/", element: <Landing /> },
+//     { path: "/login", element: <Login /> },
+//     { path: "/register", element: <Register /> },
+//     { path: "/job", element: <Job /> },
+//     { path: "/job/joblist", element: <JobList /> },
+//     { path: "/about", element: <About /> },
+//     { path: "/profiles", element: <Profiles /> },
+//   ]);
+//   return routes;
+// };
 
 class App extends Component {
   render() {
@@ -57,8 +65,23 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <Navbar/>
-      
-          <AllRoutes/>
+          <Routes>
+            <Route path='/' element= {<Landing/>}/>
+            <Route path='/login' element= {<Login/>}/>
+            <Route path='/register' element= {<Register/>}/>
+            <Route path='/job' element= {<Job/>}/>
+            <Route path='/job/joblist' element= {<JobList/>}/>
+            <Route path='/about' element= {<About/>}/>
+            <Route path='/create-profile' element= {<CreateProfile/>}/>
+            {/* <Route path='/edit-profile' element= {<EditProfile/>}/> */}
+            {/* <Route path='/edit-profile' element= {<EditProfile/>}/> */}
+           
+            <Route path='/profiles' element= {<Profiles />}/>
+
+            {/* <Route path='profiles' element = {<PrivateRoute> <Profiles/> </PrivateRoute>}  /> */}
+              
+           
+          </Routes>
           <Footer/>
         </Router>
     </Provider>

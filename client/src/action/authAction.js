@@ -3,6 +3,7 @@ import { GET_ERRORS, SET_CURRENT_USER } from "./type"
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decoder from 'jwt-decode'
 import { decode } from "jsonwebtoken";
+import { Navigate } from "react-router-dom";
 
 
 // import { TEST_DISPATCH } from "./type"

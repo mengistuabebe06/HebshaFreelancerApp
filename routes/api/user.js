@@ -24,14 +24,14 @@ router.get('/test',(req,res)=>{
 //@desc register user data 
 //private
 router.post('/register',(req,res)=>{
-    const { errors, isValid} = validateRegisterInput(req.body)
+    // const { errors, isValid} = validateRegisterInput(req.body)
 
-    //check validation
-    if(!isValid){
-        return res.status(400).json(errors.message)
-    }
+    // //check validation
+    // if(!isValid){
+    //     return res.status(400).json(errors.message)
+    // }
     
-    User.findOne({email:req.body.email})
+    User.findOne({email: req.body.email})
         .then(user=>{
             if(user){
                 return res.status(400).json({email:'Email already exits'})

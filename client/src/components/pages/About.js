@@ -29,7 +29,10 @@ import { Link } from 'react-router-dom'
                 <p><i className="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
                 <p><i className="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>
                 <a className="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>
+                <a class="btn btn-primary" style="background-color: #3b5998;" href="#!" role="button"
+                    ><i class="fab fa-facebook-f"></i> </a>
             </div>
+            
         </div>
     </div>
 </div>
