@@ -7,6 +7,7 @@ import SelectListGroup from '../shared/SelectListGroup'
 import InputGroup from '../shared/InputGroup'
 import { createProfile, getCurrentProfile} from '../../action/profileAction'
 import {useLocation,useNavigate,useParams} from 'react-router-dom'
+import isEmpty from '../../validation/is-Empty'
 
 function withRouter(Component) {
     function ComponentWithRouterProp(props) {
@@ -54,6 +55,42 @@ constructor(props){
     componentWillReceiveProps(nextProps){
         if(nextProps.errors){
             this.setState({errors: nextProps.errors})
+        }
+        // check wheater the data comes from state or not
+        if(nextProps.profile.profile){
+            const profile = nextProps.profile.profile
+
+            //bring the skills array back to CSV
+            // const skillsCSV = profile.skills.join(',')
+            //if the profile filed empty make it a string
+            profile.comany = !isEmpty(profile.comany) ? profile.comany : ""
+            profile.website = !isEmpty(profile.website) ? profile.website : ""
+            profile.location = !isEmpty(profile.location) ? profile.location : ""
+            profile.githubusername = !isEmpty(profile.githubusername) ? profile.githubusername : ""
+            profile.bio = !isEmpty(profile.bio) ? profile.bio : ""
+
+            profile.social = !isEmpty(profile.social) ? profile.social : {}
+            profile.twitter = !isEmpty(profile.social.twitter) ? profile.social.twitter : ''
+            profile.facebook = !isEmpty(profile.social.facebook) ? profile.social.facebook : ''
+            profile.linkedin = !isEmpty(profile.social.linkedin) ? profile.social.linkedin : ''
+            profile.youtube = !isEmpty(profile.social.youtube) ? profile.social.youtube : ''
+            profile.instagram = !isEmpty(profile.social.instagram) ? profile.social.instagram : ''
+
+            //set the compnents fileds state
+            this.setState({
+                handle: profile.handle,
+                company: profile.comany,
+                website: profile.website,
+                location: profile.location,
+                githubusername: profile.githubusername,
+                bio: profile.bio,
+                twitter: profile.twitter,
+                facebook: profile.facebook,
+                linkedin: profile.linkedin,
+                youtube: profile.youtube,
+                instagram: profile.instagram
+
+            })
         }
     }
     onChange(e){
@@ -145,12 +182,12 @@ constructor(props){
         {label: "Instractor or Teacher",  value: 'Instractor or Teacher'},
         {label: "Intern",  value: 'Intern'},
         {label: "Other",  value: 'Other'},
-
     ]
+    
     return (
         <section class="container">
         <h1 class="large text-primary">
-          Create Your Profile
+          Edit Your Profile
         </h1>
         <p class="lead">
           <i class="fas fa-user"></i> Let's get some information to make your

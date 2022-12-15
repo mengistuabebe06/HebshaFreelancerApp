@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import {getCurrentProfile, deleteAccount} from '../../action/profileAction'
 import Spinner from '../shared/Spinner'
 import ProfileDashboard from './ProfileDashboard'
+import Experience from './Experience'
 
  class Profiles extends Component {
     componentDidMount(){
@@ -32,6 +33,8 @@ import ProfileDashboard from './ProfileDashboard'
             </p>
             <ProfileDashboard />
             {/* TODO: exp and edu */}
+            {/* pass the experance from profile data to the Experinace page as props*/}
+            <Experience  experience = {profile.experience} />
             <div style={{marginBottom: '60px'}}> </div>
             <button onClick={this.onDeleteClick.bind(this)} className="btn btn-danger">
               Delete My Account

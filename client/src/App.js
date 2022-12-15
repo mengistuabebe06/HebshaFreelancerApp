@@ -16,6 +16,8 @@ import Profiles from './components/pages/Profiles';
 import PrivateRoute from './components/shared/PrivateRoute';
 import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
+import AddExperinace from './components/add-credential/AddExperinace';
+import AddEducation from './components/add-credential/AddEducation';
 
 import './App.css';
 import setAuthToken from './utils/setAuthToken';
@@ -73,13 +75,15 @@ class App extends Component {
             <Route path='/job/joblist' element= {<JobList/>}/>
             <Route path='/about' element= {<About/>}/>
             <Route path='/create-profile' element= {<CreateProfile/>}/>
-            {/* <Route path='/edit-profile' element= {<EditProfile/>}/> */}
+            <Route path='/edit-profile' element= {<EditProfile/>}/>
+            <Route path='/add-experience' element= {<AddExperinace/>}/>
+            <Route path='/add-education' element= {<AddEducation/>}/>
             {/* <Route path='/edit-profile' element= {<EditProfile/>}/> */}
            
             <Route path='/profiles' element= {<Profiles />}/>
 
             {/* <Route path='profiles' element = {<PrivateRoute> <Profiles/> </PrivateRoute>}  /> */}
-              
+               
            
           </Routes>
           <Footer/>
