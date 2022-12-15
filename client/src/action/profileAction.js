@@ -45,6 +45,31 @@ export const CrearCurrentProfile = () =>{
         type: CLEAR_CURRENT_PROFILE,
     }
 }
+
+//add experiance here
+export const addExperinace = (expdata, history) => dispatch=>{
+    axios
+        .post('/api/profile/experience',expdata)
+        .then(res=> history.push('/profile'))
+        .catch(err=>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+            )
+}
+//add the education inforation of the profile
+export const addEducation = (eduData, history)=> dispatch =>{
+    axios
+        .post('/api/profile/education', eduData)
+        .then(res => history.push('/job'))
+        .catch(err =>
+            dispatch ({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+            )
+}
 // delete accoutn and profile
 export const deleteAccount = () => dispatch =>{
     if(window.confirm('Are You Sure? This is not be undone!')){
